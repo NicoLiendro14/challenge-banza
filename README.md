@@ -65,6 +65,15 @@ This project use pytest and unnitest library.
 pytest
 ```
 
+## ToDo 📖
+
+- Add corresponding tests for missing endpoints
+- Improve folder structure
+- Refactor routes.py and separate logic
+- Better understand, study and review the concept of testing and the use of mocks.
+- Use of database in memory for tests.
+- Add get_total method.
+
 ## Built With 🛠️
 
 - [requests](https://docs.python-requests.org/en/latest/) - Requests is a simple, yet elegant, HTTP library.
