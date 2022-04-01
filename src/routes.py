@@ -154,3 +154,14 @@ def get_activity(id: int):
         raise HTTPException(
             status_code=404, detail=f"Client with ID {id} doesn't exist.")
     return activity_detail
+
+
+@amount_route.get("/{id}")
+def get_amount(id: int):
+    session = Session(bind=sql_service.engine, expire_on_commit=False)
+    account = session.query(Account).get(id)
+    session.close()
+    if not account:
+        raise HTTPException(
+            status_code=404, detail=f"Client with ID {id} doesn't exist.")
+    return {'balance_available': account.balance_available}
