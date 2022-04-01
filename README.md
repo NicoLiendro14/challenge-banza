@@ -49,13 +49,6 @@ You don't have to create the tables from scratch, you will create it automatical
 python service.py
 ```
 
-### Running API 🔧
-You have to run in your terminal:
-```
-uvicorn app:app --reload
-```
-And then the API is available
-
 ### Running API ⚙️
 You have to run in your terminal:
 ```
