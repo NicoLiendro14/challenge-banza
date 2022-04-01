@@ -66,14 +66,8 @@ def update_client(id: int, name: str):
 
 @ client_route.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_client(id: int):
-
-    # create a new database session
     session = Session(bind=sql_service.engine, expire_on_commit=False)
-
-    # get the todo item with the given id
     client = session.query(Client).get(id)
-
-    # if todo item with given id exists, delete it from the database. Otherwise raise 404 error
     if client:
         session.delete(client)
         session.commit()
@@ -102,7 +96,12 @@ def register_activity(activity_req: ActivitySchema):
         account.balance_available = account.balance_available + activity_req.amount
 
     if activity_req.type_of == "egreso":
-        account.balance_available = account.balance_available - activity_req.amount
+        if account.balance_available - activity_req.amount > 0:
+            account.balance_available = account.balance_available - activity_req.amount
+        else:
+            return {
+                "error": "The account balance does not have sufficient funds"
+            }
     session.add(account)
     session.add(activity_detail)
     session.commit()
