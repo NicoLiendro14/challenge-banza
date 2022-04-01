@@ -1,29 +1,8 @@
-# app.py
+from src.routes import client_route, activity_route, amount_route
 from fastapi import FastAPI
 
 app = FastAPI()
 
-
-@app.post("/client/register")
-def register_client():
-    return {"msg": "Client registered"}
-
-
-@app.put("/client/{id}")
-def update_client():
-    return {"msg": "Client updated"}
-
-
-@app.delete("/client/{id}")
-def delete_client():
-    return {"msg": "Client deleted"}
-
-
-@app.get("/client/{id}")
-def detail_client():
-    return {"msg": "Client detail"}
-
-
-@app.get("/client/all")
-def get_all_client():
-    return {"msg": "All clients"}
+app.include_router(client_route, prefix="/client")
+app.include_router(activity_route, prefix="/activity")
+app.include_router(amount_route, prefix="/amount")
